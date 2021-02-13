@@ -33,10 +33,7 @@ router.post("/register", (req, res) => {
       bcrypt.hash(newUser.password, salt, (err, hash) => {
         if (err) throw err;
         newUser.password = hash;
-        newUser
-          .save()
-          .then(user => res.json(user))
-          .catch(err => console.log(err));
+        newUser.save().then(user => res.json(user)).catch(err => console.log(err));
         });
       });
     }
@@ -91,6 +88,24 @@ router.post("/login", (req, res) => {
       }
     });
   });
+});
+
+// @route GET api/users/
+// @desc Gets all users
+// @access Public
+router.get("/", (req, res) => {
+  User.find()
+    .then(user => res.json(user))
+    .catch(err => res.status(400).json(err));
+});
+
+// @route GET api/users/:id
+// @desc Gets a specific user
+// @access Public
+router.route('/:id').get((req, res) => {
+  User.findById(req.params.id)
+    .then(user => res.json(user))
+    .catch(err => res.status(400).json(err));
 });
 
 module.exports = router;

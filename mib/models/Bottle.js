@@ -1,7 +1,13 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const messageSchema = new Schema({ message: 'string' });
+const MessageSchema = new Schema({
+  message: 'string', // INCLUDE ACTUAL COORDINATES !!!!
+  author: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User'
+  }
+});
 
 // Create Schema
 const BottleSchema = new Schema({
@@ -12,14 +18,23 @@ const BottleSchema = new Schema({
   author: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
-    required: true
   },
-  responses: 
-  [{
-    text: String, // INCLUDE ACTUAL COORDINATES !!!!
+  responses: [{
+    text: {
+      type: String,
+      required: true
+    },
     author: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'User'
+    },
+    location: {
+      type: String,
+      required: true
+    },
+    date: {
+      type: Date,
+      default: Date.now
     }
   }],
   date: {
@@ -29,6 +44,20 @@ const BottleSchema = new Schema({
   destination: {  // INCLUDE ACTUAL COORDINATES !!!!
     type: String,
     required: true
+  },
+  latestLocation: {
+    type: String,
+    default: ""
   }
 });
 module.exports = Bottle = mongoose.model("bottle", BottleSchema);
+
+/*
+Bottle = mongoose.model("bottle", BottleSchema);
+Message = mongoose.model("message", MessageSchema);
+
+module.exports = {
+  bottle: Bottle,
+  message: Message
+};
+*/
