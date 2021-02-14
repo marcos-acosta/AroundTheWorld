@@ -1,0 +1,73 @@
+.resh1 {
+    margin: auto;
+    margin-top: 50px;
+    margin-left: 25%;
+    padding-bottom: 25px;
+    font-weight: bold;
+    letter-spacing: -0.05em;
+}
+
+.bottleprompt {
+    margin: auto;
+    width: 50%;
+    padding: 10px;
+    margin-bottom: 70px;
+    height: 180px;
+    background-color: white;
+    box-shadow: 0px 10px 30px 0px rgb(175, 175, 175);
+    border-radius: 4px;
+  }
+  .resbottle {
+    margin: auto;
+    width: 50%;
+    padding: 10px;
+    margin-top:80px;
+    height: 425px;
+    box-shadow: 0px 10px 30px 0px rgb(175, 175, 175);
+    border-radius: 4px;
+  }
+
+  .resmessage {
+    margin-top: 5px;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-bottom:5px;
+    height: 90px;
+    color:rgb(108, 108, 108);
+    word-wrap: break-word;
+    font-family:sans-serif;
+    overflow:scroll;
+}
+
+.responsecontainer {
+    display: flex;
+    align-items: flex-start;
+  }
+  
+  .responsecontainer textarea {
+    flex:1;
+    resize:none;
+    margin-left: 10px;
+    margin-right: 10px;
+    border: none;
+    font-family:Arial, Helvetica, sans-serif;
+    outline: none;
+  }
+
+
+  .ressubmitbtn {
+    float:right;
+    color:white;
+    background-color:red;
+    border-radius:4px;
+    width:100px;
+    border: none;
+}
+
+.newreslabel {
+    margin-top:5px;
+    margin-left:10px;
+    font-size:20px;
+  }
+
+
