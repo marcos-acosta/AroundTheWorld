@@ -21,8 +21,9 @@ app.use(
 );
 app.use(bodyParser.json());
 // DB Config
-const db = require("./config/keys").mongoURI;
-const config = require("./config/config.js");
+// const db = require("./config/keys").mongoURI;
+const db = "mongodb+srv://dbUser:dbUserPassword@cluster0.48cvp.mongodb.net/mib?retryWrites=true&w=majority" || process.env.mongoURI
+// const config = require("./config/config.js");
 // Connect to MongoDB
 mongoose
   .connect(
@@ -35,19 +36,21 @@ mongoose
 const MongoStore = connectStore(session);
 
 app.use(session({
-  name: config.SESS_NAME,
-  secret: config.SESS_SECRET,
+  // name: config.SESS_NAME,
+  name: 'sid' || process.env.SESS_NAME,
+  // secret: config.SESS_SECRET,
+  secret: 'secret!session' || process.env.SESS_SECRET,
   saveUninitialized: false,
   resave: false,
   store: new MongoStore({
     mongooseConnection: mongoose.connection,
     collection: 'session',
-    ttl: parseInt(config.SESS_LIFETIME) / 1000
+    ttl: parseInt(1000 * 60 * 60 * 2) / 1000
   }),
   cookie: {
     sameSite: true,
-    secure: config.NODE_ENV === 'production', // This might be the cause of your issues
-    maxAge: parseInt(config.SESS_LIFETIME)
+    secure: process.env.NODE_ENV === 'production', // This might be the cause of your issues
+    maxAge: parseInt(1000 * 60 * 60 * 2)
   }
 }));
 
@@ -69,5 +72,5 @@ apiRouter.use('/session', sessions);
 // app.use("/api/users", users);
 // app.use("/api/bottles", bottles);
 
-const port = process.env.PORT || config.PORT; // process.env.port is Heroku's port if you choose to deploy the app there
+const port = process.env.PORT || 5000; // process.env.port is Heroku's port if you choose to deploy the app there
 app.listen(port, () => console.log(`Server up and running on port ${port} !`));
