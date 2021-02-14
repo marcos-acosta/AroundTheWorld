@@ -16,17 +16,30 @@ export default class AddToBottle extends Component {
       text: '',
       author: '',
       location: '',
+      promptAuthor: '',
+      prompt: '',
+      destination: ''
     }
   }
 
   componentDidMount() {
-      navigator.geolocation.getCurrentPosition(function(position) {
-        console.log("Latitude is :", position.coords.latitude);
-        console.log("Longitude is :", position.coords.longitude);
-        // this.setState({
-        //   location: position.coords.latitude
-        // });
-      });
+    navigator.geolocation.getCurrentPosition(function(position) {
+      console.log("Latitude is :", position.coords.latitude);
+      console.log("Longitude is :", position.coords.longitude);
+      // this.setState({
+      //   location: position.coords.latitude
+      // });
+    });
+    console.log(this.props.match.params.id)
+    axios.get('http://localhost:5000/api/bottles/' + this.props.match.params.id)
+    .then(response => {
+      this.setState({prompt: response.data.prompt})
+      this.setState({promptAuthor: response.data.author})
+      this.setState({destination: response.data.destination})
+    })
+    .catch(err => {
+      console.log(err);
+    })
   }
 
   onChangeText(e) {
@@ -79,17 +92,14 @@ export default class AddToBottle extends Component {
     <h1 className="resh1">Your Response</h1>
 
     <div className="bottleprompt">
-          <div className="newreslabel">User</div>
-          {/* <div className="username">{this.state.name}</div> */}
+          <div className="newreslabel">{this.state.promptAuthor} asks:</div>
+          {/* <div className="username"></div> */}
               <div className="resmessage">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-              incididunt ut labore et dolore magna aliqua. Tempus iaculis urna id volutpat lacus laoreet non. Id neque
-              aliquam vestibulum morbi. Vitae ultricies leo integer malesuada nunc vel risus commodo. Sit amet luctus
-              venenatis lectus magna fringilla urna.
+              {this.state.prompt}
             </div>
             
           <div>
-          <span className="destinationlabel">Destination:</span><span className="destinationtext">Mars, Milky Way</span>
+          <span className="destinationlabel">Destination:</span><span className="destinationtext">{this.state.destination}</span>
         </div>
       </div>
 
