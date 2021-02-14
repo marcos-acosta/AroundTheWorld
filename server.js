@@ -24,7 +24,7 @@ app.use(bodyParser.json());
 // DB Config
 // const db =  process.env.MONGOURI || require("./config/keys").mongoURI;
 // const db = "mongodb+srv://dbUser:dbUserPassword@cluster0.48cvp.mongodb.net/mib?retryWrites=true&w=majority"
-const config = require("./config/config.js");
+const db = require("./config/keys.js").mongoURI;
 // Connect to MongoDB
 mongoose
   .connect(
