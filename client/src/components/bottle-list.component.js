@@ -71,7 +71,7 @@ class Bottle extends Component {
       <div className="availablebottle">
       {/* <a href={"bottles/write/"+this.props.bottle._id}> */}
         <Link to={{
-          pathname:"bottles/write/"+this.props.bottle._id,
+          pathname:"write/"+this.props.bottle._id,
           name: this.state.name,
           prompt: this.props.bottle.prompt,
         }}>
