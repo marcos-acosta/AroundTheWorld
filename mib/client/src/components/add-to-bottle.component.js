@@ -10,11 +10,24 @@ export default class AddToBottle extends Component {
     this.onChangeAuthor = this.onChangeAuthor.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
     
-
     this.state = {
       text: '',
       author: '',
       location: '',
+    }
+  }
+
+  componentDidMount() {
+    if ("geolocation" in navigator) {
+      navigator.geolocation.getCurrentPosition(function(position) {
+        console.log("Latitude is :", position.coords.latitude);
+        console.log("Longitude is :", position.coords.longitude);
+        this.setState({
+          location: position.coords.latitude
+        });
+      });
+    } else {
+      console.log("User disabled location access.")
     }
   }
 
