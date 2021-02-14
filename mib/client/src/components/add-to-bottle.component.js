@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios'
 
+import './add-to-bottle.component.css'
+
 export default class AddToBottle extends Component {
   constructor(props) {
     super(props);
@@ -18,17 +20,13 @@ export default class AddToBottle extends Component {
   }
 
   componentDidMount() {
-    if ("geolocation" in navigator) {
       navigator.geolocation.getCurrentPosition(function(position) {
         console.log("Latitude is :", position.coords.latitude);
         console.log("Longitude is :", position.coords.longitude);
-        this.setState({
-          location: position.coords.latitude
-        });
+        // this.setState({
+        //   location: position.coords.latitude
+        // });
       });
-    } else {
-      console.log("User disabled location access.")
-    }
   }
 
   onChangeText(e) {
@@ -75,34 +73,35 @@ export default class AddToBottle extends Component {
   }
 
   render() {
+    // const {name, prompt} = this.props.location;
     return(
       <div>
-        <h3>Update bottle</h3>
-        <form onSubmit={this.onSubmit}>
-          <div className="form-group">
-            <label>Author: </label>
-            <input type="text"
-              required
-              className="form-control"
-              value={this.state.author}
-              onChange={this.onChangeAuthor}/>
-            <label>Message: </label>
-            <input type="text"
-              required
-              className="form-control"
-              value={this.state.text}
-              onChange={this.onChangeText}/>
-            <label>Location: </label>
-            <input type="text"
-              required
-              className="form-control"
-              value={this.state.location}
-              onChange={this.onChangeLocation}/>
+    <h1 className="resh1">Your Response</h1>
+
+    <div className="bottleprompt">
+          <div className="newreslabel">User</div>
+          {/* <div className="username">{this.state.name}</div> */}
+              <div className="resmessage">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+              incididunt ut labore et dolore magna aliqua. Tempus iaculis urna id volutpat lacus laoreet non. Id neque
+              aliquam vestibulum morbi. Vitae ultricies leo integer malesuada nunc vel risus commodo. Sit amet luctus
+              venenatis lectus magna fringilla urna.
+            </div>
+            
+          <div>
+          <span className="destinationlabel">Destination:</span><span className="destinationtext">Mars, Milky Way</span>
+        </div>
+      </div>
+
+    <div className="resbottle">
+              <form>
+                <div className="newreslabel">User</div>
+                <div className="responsecontainer">
+                  <textarea rows="14" placeholder="Your text here..." required value={this.state.text} onChange={this.onChangeText}></textarea>
+                </div>
+                <input className="ressubmitbtn" type="submit" value="SUBMIT"></input>
+              </form>
           </div>
-          <div className="form-group">
-            <input type="submit" value="Add to bottle" className="btn btn-primary"/>
-          </div>
-        </form>
       </div>
     )
   }

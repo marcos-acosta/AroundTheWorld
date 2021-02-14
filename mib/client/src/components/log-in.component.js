@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import axios from 'axios'
+import axios from 'axios';
+
+import './log-in.component.css';
 
 export default class LogIn extends Component {
   constructor(props) {
@@ -50,26 +52,53 @@ export default class LogIn extends Component {
 
   render() {
     return(
-      <div>
-        <h3>Log in</h3>
-        <form onSubmit={this.onSubmit}>
-          <div className="form-group">
-            <input type="email"
-              required
-              className="form-control"
-              value={this.state.email}
-              onChange={this.onChangeEmail}/>
-            <input type="password"
-              required
-              className="form-control"
-              value={this.state.password}
-              onChange={this.onChangePassword}/>
+      <div className="createcontainer">
+      <form onSubmit={this.onSubmit}>
+          <div className="row">
+              <div className="welcome">
+                <p className="p">Welcome back</p>
+              </div>
+              <div className="createyouraccount">
+                <h1 className="loginh1">Login to your account</h1>
+              </div>
+              <p className="p">Email</p>
+              <input type="email" value={this.state.email} onChange={this.onChangeEmail} required></input>
+
+              <p className="p">Password</p>
+              <input type="password" value={this.state.password} onChange={this.onChangePassword} required></input>
+
+              <input className="input" type="submit" value="Login now"></input>
+
+              <div className="bottom-container">
+                  <span className="psw">Don't have an account?</span> <a href="/signup">Join free today</a>
+              </div>
           </div>
-          <div className="form-group">
-            <input type="submit" value="Log in"/>
-          </div>
-        </form>
-      </div>
+      </form>
+  </div>
+
+
+
+
+      // <div>
+      //   <h3>Log in</h3>
+      //   <form onSubmit={this.onSubmit}>
+      //     <div className="form-group">
+      //       <input type="email"
+      //         required
+      //         className="form-control"
+      //         value={this.state.email}
+      //         onChange={this.onChangeEmail}/>
+      //       <input type="password"
+      //         required
+      //         className="form-control"
+      //         value={this.state.password}
+      //         onChange={this.onChangePassword}/>
+      //     </div>
+      //     <div className="form-group">
+      //       <input type="submit" value="Log in"/>
+      //     </div>
+      //   </form>
+      // </div>
     )
   }
 }

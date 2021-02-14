@@ -3,27 +3,93 @@ import { Link } from 'react-router-dom';
 import axios from 'axios';
 import './bottle-list.component.css';
 
-const Bottle = function(props) { 
-  // let responses = []
-  // for (let i = 0; i < props.bottle.responses.length; i++) {
-  //   let response = props.bottle.responses[i]
-  //   let responseText = response.text
-  //   let id = response._id
-  //   let authorId = response.author
-  //   let location = response.location
+class Bottle extends Component {
+
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      // text:'',
+      // author:'',
+      // destination:'',
+
+      name: ''
+    };
+  }
+
+  componentDidMount() {
+    axios.get('http://localhost:5000/api/users/' + this.props.bottle.author)
+      .then(response => {
+        this.setState({name: response.data.name})
+      })
+      .catch(err => {
+        console.log(err);
+      })
+  }
+
+  // onChangeText(e) {
+  //   this.setState({
+  //     text: e.target.value
+  //   });
   // }
-  return (
-    <div className="bottle">
-        <div className="username">{props.bottle.author}</div>
-          <div className="message">
-            {props.bottle.prompt}
-            <Link to={"bottles/write/"+props.bottle._id}>Respond</Link>
-          </div>
-        <div>
-        <span className="destinationlabel">Destination:</span><span className="destinationtext">{props.bottle.destination}</span>
+
+  // onChangeDestination(e) {
+  //   this.setState({
+  //     destination: e.target.value
+  //   });
+  // }
+
+  // onSubmit(e) {
+  //   e.preventDefault();
+  //   const message = {
+  //     text: this.state.text,
+  //     destination: this.state.destination,
+  //     author: this.state.author,
+  //   }
+  //   console.log(message);
+  //   console.log(this.props.match.params.id)
+  //   let id = this.props.match.params.id
+
+  //   axios.post('http://localhost:5000/api/bottles/write/' + id, message)
+  //     .then(res => {
+  //       console.log(res.data)
+  //       window.location = '/bottles';
+  //     }).catch(err => console.log(err));
+
+
+  //   this.setState({
+  //     text: '',
+  //     author: '',
+  //     destination: '',
+  //   })
+  // }
+
+  render(){
+    return (
+      <div>
+
+      <div className="availablebottle">
+      {/* <a href={"bottles/write/"+this.props.bottle._id}> */}
+        <Link to={{
+          pathname:"bottles/write/"+this.props.bottle._id,
+          name: this.state.name,
+          prompt: this.props.bottle.prompt,
+        }}>
+          <div className="username">{this.state.name}</div>
+              <div className="message">
+              {this.props.bottle.prompt}
+            </div>
+            
+          <div>
+          <span className="destinationlabel">Destination:</span><span className="destinationtext">{this.props.bottle.destination}</span>
+        </div>
+        {/* </a> */}
+        </Link>
       </div>
-    </div>
-  )
+
+      </div>
+    )
+  }
 };
 
 export default class BottleList extends Component {
@@ -49,7 +115,6 @@ export default class BottleList extends Component {
   bottleList() {
     let bottles = this.state.bottles;
     let res = [];
-    let promises = [];
     for (let i = 0; i < bottles.length; i++) {
       res.push(<Bottle bottle={bottles[i]} key={bottles[i]._id}/>);
     }
@@ -63,15 +128,11 @@ export default class BottleList extends Component {
  
       <div>
 
-        <div className="topbar"></div>    
-        <div className="container">
-        
-        </div>
+          
         <div className="sidenav">
           <a href="#home" className="homebtn">Home</a>
           <a href="#profile" className="profilebtn">Profile</a>
-        </div>
-
+        </div> 
         <div className="newbottle">
               <form>
                 <div className="newpostlabel">New post:</div>
@@ -84,9 +145,9 @@ export default class BottleList extends Component {
               </form>
           </div>
         <br/>
-        <div className="container">
+
           { this.bottleList() }
-        </div>
+
       </div>
     )
   }

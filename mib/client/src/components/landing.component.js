@@ -6,13 +6,15 @@ import background from './assets/landingpage.jpg'
 
 export default function Landing() {
   return(
-    <div className="body">
+    <div className="bodylanding">
+
+      <img src={background} className="bg"></img>
       <div className="topbar">
         <div className="logotext">
             <img src={logo} className="logo"></img>MIB
             </div>
       </div>
-      <div className="bg"></div>
+      
       <div className="bottombar">
         <a href="/login">
           <button className="loginbutton">login</button>
