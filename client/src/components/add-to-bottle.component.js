@@ -18,7 +18,8 @@ export default class AddToBottle extends Component {
       location: '',
       promptAuthor: '',
       prompt: '',
-      destination: ''
+      destination: '',
+      authorName: ''
     }
   }
 
@@ -36,6 +37,11 @@ export default class AddToBottle extends Component {
       this.setState({prompt: response.data.prompt})
       this.setState({promptAuthor: response.data.author})
       this.setState({destination: response.data.destination})
+    }).then(() => {
+      axios.get('http://localhost:5000/api/users/' + this.state.promptAuthor)
+      .then(response => {
+        this.setState({authorName: response.data.name})
+      });
     })
     .catch(err => {
       console.log(err);
@@ -92,7 +98,7 @@ export default class AddToBottle extends Component {
     <h1 className="resh1">Your Response</h1>
 
     <div className="bottleprompt">
-          <div className="newreslabel">{this.state.promptAuthor} asks:</div>
+          <div className="newreslabel">{this.state.authorName} asks:</div>
           {/* <div className="username"></div> */}
               <div className="resmessage">
               {this.state.prompt}

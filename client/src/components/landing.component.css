@@ -107,3 +107,9 @@
     z-index:1000; 
 
   }
+
+  .about {
+    position: absolute;
+    top: 55vw;
+    padding: 3vw;
+  }
