@@ -54,15 +54,6 @@ export default class BottleList extends Component {
     let res = [];
     for (let i = 0; i < bottles.length; i++) {
       res.push(<Bottle bottle={bottles[i]} key={bottles[i]._id}/>);
-      // var numberOwners = users.filter(user => {
-      //   return user.number === i;
-      // });
-      // if (numberOwners === undefined || numberOwners.length === 0) {
-      //   res.push(<NoUser number={i}/>)
-      // } else {
-      //   let numberOwner = numberOwners[0];
-      //   res.push(<User user={numberOwner} deleteUser={this.deleteUser} key={numberOwner._id}/>)
-      // }
     }
     return res
   }
