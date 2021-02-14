@@ -51,13 +51,3 @@ const BottleSchema = new Schema({
   }
 });
 module.exports = Bottle = mongoose.model("bottle", BottleSchema);
-
-/*
-Bottle = mongoose.model("bottle", BottleSchema);
-Message = mongoose.model("message", MessageSchema);
-
-module.exports = {
-  bottle: Bottle,
-  message: Message
-};
-*/

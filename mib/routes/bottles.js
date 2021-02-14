@@ -1,12 +1,12 @@
 const express = require("express");
 const router = express.Router();
 
-const Bottle = require("../../models/Bottle");
-const User = require("../../models/User");
+const Bottle = require("../models/Bottle");
+const User = require("../models/User");
 
 // Load input validation
-const validateBottleInput = require("../../validation/bottle");
-const validateMessageInput = require("../../validation/message");
+const validateBottleInput = require("../validation/bottle");
+const validateMessageInput = require("../validation/message");
 
 // @route POST api/bottles/new
 // @desc Creates a new bottle
